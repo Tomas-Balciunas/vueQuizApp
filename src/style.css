@@ -1,0 +1,19 @@
+html {
+  height: 100%;
+  background-image: url(./assets/bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+* {
+  font-family: 'Courier New', monospace;
+}
+
+body {
+  height: inherit;
+}
+
+#app {
+  height: inherit;
+}
