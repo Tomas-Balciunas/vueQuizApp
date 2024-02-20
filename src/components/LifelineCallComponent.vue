@@ -19,7 +19,8 @@ const getResponse = async () => {
 
   response.value = await fetchOpenAi(
     props.current.question,
-    props.current.choices
+    props.current.choices,
+    props.current.correct_answer
   );
 };
 </script>

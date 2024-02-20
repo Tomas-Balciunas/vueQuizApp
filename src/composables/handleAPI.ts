@@ -8,27 +8,33 @@ import {
   QUIZ_BASE_URL,
 } from "../info/info";
 
-const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPEN_AI_KEY,
-  dangerouslyAllowBrowser: true,
-});
+const openAiKey = import.meta.env.VITE_OPEN_AI_KEY;
 
-export async function fetchOpenAi(question: string, choices: string) {
-  const response = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content: GPT_CONTEXT,
-      },
-      {
-        role: "user",
-        content: `${GPT_PROMPT} ${question} ${choices}`,
-      },
-    ],
-    model: GPT_MODEL,
-  });
+export async function fetchOpenAi(question: string, choices: string, correct: string) {
+  if (!openAiKey) {
+    return `Error: API key not found as an environmental variable.\n\n Correct answer: ${correct}`
+  } else {
+    const openai = new OpenAI({
+      apiKey: openAiKey,
+      dangerouslyAllowBrowser: true,
+    });
 
-  return response.choices[0].message.content;
+    const response = await openai.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content: GPT_CONTEXT,
+        },
+        {
+          role: "user",
+          content: `${GPT_PROMPT} ${question} ${choices}`,
+        },
+      ],
+      model: GPT_MODEL,
+    });
+
+    return response.choices[0].message.content;
+  }
 }
 
 export async function fetchQuestions() {
