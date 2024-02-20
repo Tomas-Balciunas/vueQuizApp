@@ -36,14 +36,12 @@ onMounted(async () => {
   try {
     score.$reset();
     const savedQ = localStorage.getItem("quiz");
-
     if (!savedQ) {
       data.value = await fetchQuestions();
       localStorage.setItem("quiz", JSON.stringify(data.value));
     } else {
       data.value = JSON.parse(savedQ);
     }
-
     !empty.value && quiz.updateCurrentQuestion(data.value);
   } catch (error) {
     console.error("Data fetch error:", error);
@@ -92,13 +90,24 @@ onMounted(async () => {
     </div>
   </div>
 
-  <div v-else>
-    <h1>No data found</h1>
-    <RouterLink to="/results"></RouterLink>
+  <div class="h-100" v-else>
+    <h1>Waiting for data...</h1>
+    <div class="d-flex flex-column align-center">
+      <v-progress-circular
+        :size="100"
+        color="red"
+        indeterminate
+      ></v-progress-circular>
+    </div>
   </div>
 </template>
 
 <style scoped>
+h1 {
+  text-align: center;
+  color: white;
+  padding: 10vh;
+}
 .cont {
   height: 100vh;
   display: flex;

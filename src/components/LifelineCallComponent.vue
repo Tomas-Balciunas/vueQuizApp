@@ -35,6 +35,7 @@ const getResponse = async () => {
           @click.once="getResponse"
           @click="dialog = true"
           icon="mdi-phone-in-talk"
+          aria-label="call a friend"
         ></v-btn>
       </template>
     </v-tooltip>

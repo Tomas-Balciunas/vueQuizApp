@@ -5,8 +5,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="question">
-    <span>
+  <div class="question" aria-labelledby="question">
+    <span id="question">
       {{ props.question }}
     </span>
   </div>

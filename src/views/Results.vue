@@ -6,14 +6,16 @@ const score = useScoreStore();
 </script>
 
 <template>
-  <h1>Quiz results</h1>
-  <RouterLink to="/"><h3>HOME</h3></RouterLink>
+  <h1 aria-label="quiz results">Quiz results</h1>
+  <div class="d-flex justify-center">
+    <RouterLink to="/"><h3 aria-label="home">HOME</h3></RouterLink>
+  </div>
   <div v-if="score.scores.length > 0" class="d-flex flex-column align-center" :style="'height: 70vh'">
     <div class="cont">
       <div class="wrapper" v-for="i in score.scores">
 
         <div class="w-100 resQ">
-          <p>{{ i.question }}</p>
+          <p aria-label="question">{{ i.question }}</p>
         </div>
 
         <div class="w-100 d-flex flex-column">
@@ -22,7 +24,7 @@ const score = useScoreStore();
               <p>Your answer</p>
             </div>
             <div class="w-50" v-if="!i.status">
-              <p>Corrent answer</p>
+              <p>Correct answer</p>
             </div>
           </div>
 
@@ -31,10 +33,10 @@ const score = useScoreStore();
               :class="{ correct: i.status, incorrect: !i.status }"
               class="w-50 resC">
 
-              <p>{{ i.answer }}</p>
+              <p aria-label="your answer">{{ i.answer }}</p>
             </div>
             <div class="w-50 resC" v-if="!i.status">
-              <p>{{ i.correct }}</p>
+              <p aria-label="correct answer">{{ i.correct }}</p>
             </div>
           </div>
         </div>

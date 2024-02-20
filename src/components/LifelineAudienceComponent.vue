@@ -37,6 +37,7 @@ const getVotes = () => {
           @click.once="getVotes"
           @click="dialog = true"
           icon="mdi-chart-bar"
+          aria-label="ask the audience"
         ></v-btn
       ></template>
     </v-tooltip>

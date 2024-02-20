@@ -25,14 +25,14 @@ function handleSubmit() {
   <div class="cont">
     <h1>Welcome to the Quiz!</h1>
     <div class="wrapper">
-      <p class="mb-2">Select difficulty</p>
+      <p class="mb-2" id="difficulty">Select difficulty</p>
       <v-btn-toggle :color="'#ffbf00'" v-model="diffToggle" shaped mandatory
-        ><v-btn v-for="diff in difficulties" class="btnToggle" :ripple="false">
+        ><v-btn v-for="diff in difficulties" class="btnToggle" :ripple="false" aria-labelledby="difficulty">
           {{ diff.name }}
         </v-btn>
       </v-btn-toggle>
 
-      <p class="mt-3">Select question amount</p>
+      <p class="mt-3" id="amount">Select question amount</p>
       <v-slider
         v-model="amtToggle"
         thumb-label="always"
@@ -43,6 +43,7 @@ function handleSubmit() {
         :step="1"
         class="amtPicker"
         hide-details
+        aria-labelledby="amount"
         ><template v-slot:prepend>
           <p>{{ amounts.min }}</p>
         </template>

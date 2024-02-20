@@ -30,7 +30,7 @@ quizWatcher(() => {
 
 <template>
   <button class="btn" :class="status" @click="answerSelect">
-    <span>{{ props.choice }}</span>
+    <span aria-label="option">{{ props.choice }}</span>
   </button>
 </template>
 

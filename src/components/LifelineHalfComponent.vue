@@ -29,6 +29,7 @@ const cutInHalf = () => {
           :disabled="disabled"
           @click.once="cutInHalf"
           icon="mdi-fraction-one-half"
+          aria-label="cut in half"
         ></v-btn
       ></template>
     </v-tooltip>
