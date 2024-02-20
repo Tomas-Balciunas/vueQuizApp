@@ -28,5 +28,15 @@ span {
   font-size: calc(20px + 0.5vw);
   color: #ffbf00;
   font-weight: bold;
+  user-select: none;
+}
+
+@media (max-height: 415px) {
+  .question, span {
+    padding: 0;
+  }
+  span {
+    font-size: 20px;
+  }
 }
 </style>

@@ -41,20 +41,17 @@ span {
   margin: 1em;
   font-size: calc(12px + 0.5vw);
   color: white;
+  user-select: none;
 }
 
 .btn {
   width: 95%;
   margin: 1vw 5px;
+  padding: 1rem;
   max-width: 500px;
   background-color: #0a0a0a;
   border: solid rgb(236, 236, 236) 3px;
   border-radius: 1em / 2em;
-}
-
-button {
-  width: 100%;
-  padding: 1rem;
 }
 
 @media (hover: hover) {
@@ -65,41 +62,18 @@ button {
   }
 }
 
-@keyframes success {
-  0% {
-    background-color: #0a0a0a;
-  }
-  33% {
-    background-color: #008040;
-  }
-  66% {
-    background-color: #0a0a0a;
-  }
-  100% {
-    background-color: #008040;
-  }
-}
-
 .success {
   animation: success 0.5s linear forwards;
 }
 
-@keyframes failure {
-  0% {
-    background-color: #0a0a0a;
-  }
-  33% {
-    background-color: #bd271a;
-  }
-  66% {
-    background-color: #0a0a0a;
-  }
-  100% {
-    background-color: #bd271a;
-  }
-}
-
 .failure {
   animation: failure 0.5s linear forwards;
+}
+
+@media (max-height: 415px) {
+  .btn {
+    margin: 3px 0;
+    padding: 10px 5px;
+  }
 }
 </style>

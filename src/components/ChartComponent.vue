@@ -26,11 +26,20 @@ const series = [
 const chartOptions = {
   chart: {
     type: "bar",
-    height: 380,
     toolbar: {
       show: false,
     },
   },
+  responsive: [
+    {
+      breakpoint: 370,
+      options: {
+        chart: {
+          height: 200,
+        },
+      },
+    },
+  ],
   plotOptions: {
     bar: {
       barHeight: "100%",
@@ -46,7 +55,7 @@ const chartOptions = {
     enabled: true,
     textAnchor: "start",
     style: {
-      colors: ["#fff"],
+      colors: "black",
     },
     formatter: function (val: any, opt: any) {
       return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val;
@@ -67,8 +76,8 @@ const chartOptions = {
     floating: false,
     offsetY: 13,
     style: {
-      fontSize:  '20px',
-      fontWeight:  'bold',
+      fontSize: "20px",
+      fontWeight: "bold",
     },
   },
   tooltip: {
@@ -85,8 +94,8 @@ const chartOptions = {
     },
   },
   legend: {
-      show: false,
-  }
+    show: false,
+  },
 };
 </script>
 
@@ -94,9 +103,9 @@ const chartOptions = {
   <vue-apex-charts
     v-if="votes"
     type="bar"
-    height="380"
     :options="chartOptions"
     :series="series"
+    :height="400"
   />
 </template>
 

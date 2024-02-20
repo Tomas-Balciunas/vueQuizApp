@@ -58,11 +58,12 @@ onMounted(async () => {
         <QuestionComponent :question="quiz.current.question" />
       </div>
     </div>
+
     <div class="wrapper">
       <div class="quiz-c">
         <v-col
           v-for="c in quiz.current.choices"
-          md="6"
+          sm="6"
           cols="12"
           class="quiz-c quiz-c-btn"
         >

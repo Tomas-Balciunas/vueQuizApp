@@ -17,3 +17,33 @@ body {
 #app {
   height: inherit;
 }
+
+@keyframes success {
+  0% {
+    background-color: #0a0a0a;
+  }
+  33% {
+    background-color: #008040;
+  }
+  66% {
+    background-color: #0a0a0a;
+  }
+  100% {
+    background-color: #008040;
+  }
+}
+
+@keyframes failure {
+  0% {
+    background-color: #0a0a0a;
+  }
+  33% {
+    background-color: #bd271a;
+  }
+  66% {
+    background-color: #0a0a0a;
+  }
+  100% {
+    background-color: #bd271a;
+  }
+}
