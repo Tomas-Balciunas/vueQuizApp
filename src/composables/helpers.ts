@@ -100,6 +100,6 @@ export function resetAll() {
   const quiz = useQuizStore();
 
   localStorage.removeItem("quiz");
-  score.$reset()
-  quiz.$reset()
+  score.$reset();
+  quiz.$reset();
 }

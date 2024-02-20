@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { useQuizStore } from "../stores/quiz";
 import { quizWatcher } from "../composables/quizWatcher";
 import { ref } from "vue";
 
 const props = defineProps({
+  quiz: { type: Object, default: () => {} },
   choice: String,
-  inactive: Boolean,
 });
 
 const emit = defineEmits();
-const quiz = useQuizStore();
 
 const status = ref({
   success: false,
@@ -17,14 +15,11 @@ const status = ref({
 });
 
 const answerSelect = () => {
-  quiz.userAnswer(props.choice as string);
+  props.quiz.answer = props.choice;
   emit("selected");
-
-  if (quiz.validatedAnswer) {
-    status.value.success = true;
-  } else {
-    status.value.failure = true;
-  }
+  props.quiz.validatedAnswer
+    ? (status.value.success = true)
+    : (status.value.failure = true);
 };
 
 quizWatcher(() => {
@@ -34,9 +29,9 @@ quizWatcher(() => {
 </script>
 
 <template>
-    <button class="btn" :class="status" @click="answerSelect">
-      <span>{{ props.choice }}</span>
-    </button>
+  <button class="btn" :class="status" @click="answerSelect">
+    <span>{{ props.choice }}</span>
+  </button>
 </template>
 
 <style scoped>

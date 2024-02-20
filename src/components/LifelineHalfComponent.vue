@@ -14,8 +14,8 @@ const cutInHalf = () => {
   const shuffled: string[] = shuffle(props.current.incorrect_answers);
 
   for (let i = 0; i < half; i++) {
-    const k = props.current.choices.findIndex((w: string) => w === shuffled[i]);
-    props.current.choices.splice(k, 1);
+    const index = props.current.choices.findIndex((e: string) => e === shuffled[i]);
+    props.current.choices.splice(index, 1);
   }
 };
 </script>

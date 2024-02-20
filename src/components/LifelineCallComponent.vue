@@ -7,8 +7,8 @@ const props = defineProps({
   current: { type: Object, default: () => {} },
 });
 
-const dialog = ref(false);
 const disabled = ref(false);
+const dialog = ref(false);
 const response = ref();
 
 const getResponse = async () => {

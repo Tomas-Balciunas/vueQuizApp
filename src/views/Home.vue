@@ -27,7 +27,7 @@ function handleSubmit() {
     <div class="wrapper">
       <p class="mb-2">Select difficulty</p>
       <v-btn-toggle :color="'#ffbf00'" v-model="diffToggle" shaped mandatory
-        ><v-btn v-for="diff in difficulties" class="btnToggle">
+        ><v-btn v-for="diff in difficulties" class="btnToggle" :ripple="false">
           {{ diff.name }}
         </v-btn>
       </v-btn-toggle>

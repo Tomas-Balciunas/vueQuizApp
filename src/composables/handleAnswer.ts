@@ -1,21 +1,13 @@
-import { watch } from "vue";
-import { useQuizStore } from "../stores/quiz";
+import { useScoreStore } from "../stores/score";
 
-export function userChoice(choice: string) {
-  const quiz = useQuizStore();
-  quiz.answer = choice;
-}
+export async function handleAnswer(quiz: any) {
+  const score = useScoreStore();
+  const status = quiz.validatedAnswer
+  score.updateScore(status, quiz.current.question, quiz.answer, quiz.current.correct_answer);
 
-export function answerHandler() {
-  const quiz = useQuizStore();
-
-  return new Promise((resolve) => {
-    const unwatch = watch(
-      () => quiz.answer,
-      () => {
-        resolve(quiz.validatedAnswer);
-        unwatch();
-      }
-    );
-  });
+  return await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(false)
+    }, 1000)
+  );
 }

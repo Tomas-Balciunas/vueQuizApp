@@ -17,8 +17,8 @@ const vuetify = createVuetify({
   directives,
 });
 
-const pinia = createPinia();
 const app = createApp(App);
+const pinia = createPinia();
 
 app.use(VueAxios, axios);
 app.use(pinia);

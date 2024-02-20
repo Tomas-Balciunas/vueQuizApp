@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import { useScoreStore } from "../stores/score";
 import { computed } from "vue";
 
 const props = defineProps({
   total: { type: String, default: () => 0 },
+  scores: { type: Object, default: () => [] }
 });
 
-const score = useScoreStore();
-
 const progress = computed(() => {
-  return (score.scores.length / parseInt(props.total)) * 100;
+  return (props.scores.length / parseInt(props.total)) * 100;
 });
 </script>
 
 <template>
   <v-progress-linear
     :height="8"
-    color="white"
+    color="#FF5349"
     stream
     v-model="progress"
   ></v-progress-linear>

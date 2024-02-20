@@ -27,11 +27,11 @@ const router = createRouter({
 router.beforeEach((to, _) => {
   if (to.name == "quiz") {
     if (Object.keys(to.query).length === 0) {
-      return { name: "home" }
+      return { name: "home" };
     }
 
     if (!validateParams(to.query as Query)) {
-      return { name: "home" }
+      return { name: "home" };
     }
   }
 });

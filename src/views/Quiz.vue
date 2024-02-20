@@ -6,25 +6,26 @@ import LifelineCallComponent from "../components/LifelineCallComponent.vue";
 import LifelineHalfComponent from "../components/LifelineHalfComponent.vue";
 import LifelineAudienceComponent from "../components/LifelineAudienceComponent.vue";
 import { fetchQuestions } from "../composables/handleAPI";
-import { main } from "../composables/mainLoop";
+import { handleAnswer } from "../composables/handleAnswer";
 import { useQuizStore } from "../stores/quiz";
 import { useScoreStore } from "../stores/score";
 import { useRouter, useRoute } from "vue-router";
 import { onMounted, ref, computed } from "vue";
 
 const data = ref([]);
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
 const score = useScoreStore();
 const quiz = useQuizStore();
 const disabled = ref(false);
 
 const initQuiz = async () => {
-  console.log(score.scores)
-    disabled.value = true;
-    disabled.value = (await main(quiz)) as boolean;
-    data.value.shift();
-    !empty.value ? quiz.updateCurrentQuestion(data.value) : router.push({name: "results"})
+  disabled.value = true;
+  disabled.value = (await handleAnswer(quiz)) as boolean;
+  data.value.shift();
+  !empty.value
+    ? quiz.updateCurrentQuestion(data.value)
+    : router.push({ name: "results" });
 };
 
 const empty = computed(() => {
@@ -45,43 +46,47 @@ onMounted(async () => {
 
     !empty.value && quiz.updateCurrentQuestion(data.value);
   } catch (error) {
-    console.error("onMounted error:", error);
+    console.error("Data fetch error:", error);
   }
 });
 </script>
 
 <template>
   <div v-if="!empty" class="cont">
-    <div class="wrapper">
-      <div>
+    <div class="wrapper-q">
+      <div class="quiz-q">
         <QuestionComponent :question="quiz.current.question" />
       </div>
     </div>
     <div class="wrapper">
-      <div class="quiz_c">
+      <div class="quiz-c">
         <v-col
           v-for="c in quiz.current.choices"
           md="6"
           cols="12"
-          class="quiz_c quiz-c-btn"
+          class="quiz-c quiz-c-btn"
         >
           <ChoiceComponent
             :disabled="disabled"
             :choice="c"
-            :inactive="disabled"
+            :quiz="quiz"
             @selected="initQuiz"
         /></v-col>
       </div>
     </div>
 
     <div class="wrapper">
-      <div class="d-flex justify-center quiz_b">
+      <div class="d-flex justify-center quiz-b">
         <LifelineAudienceComponent :current="quiz.current" />
         <LifelineHalfComponent :current="quiz.current" />
         <LifelineCallComponent :current="quiz.current" />
       </div>
       <div>
-        <ProgressComponent :data="data" :total="(route.query.amount as string)" />
+        <ProgressComponent
+          :data="data"
+          :scores="score.scores"
+          :total="(route.query.amount as string)"
+        />
       </div>
     </div>
   </div>
@@ -101,8 +106,16 @@ onMounted(async () => {
   align-items: center;
 }
 
-.quiz_c {
+.quiz-q {
+  display: flex;
+  justify-content: center;
   width: 100%;
+  background-color: #0a0a0a;
+  border-bottom: solid #ffbf00 3px;
+  border-radius: 0 0 10% 10%;
+}
+
+.quiz-c {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -113,14 +126,19 @@ onMounted(async () => {
   padding: 0;
 }
 
-.quiz_b {
+.quiz-b {
   margin: 5vh 0;
-  border-top: solid 3px white;
+  border-top: solid 3px #ffbf00;
   border-radius: 45%;
 }
 
 .wrapper {
   max-width: 70em;
   width: 100%;
+}
+
+.wrapper-q {
+  width: 100%;
+  margin-bottom: 2vh;
 }
 </style>

@@ -23,7 +23,7 @@ const getVotes = () => {
       props.current.choices,
       props.current.correct_answer
     );
-  }, 30);
+  }, 3000);
 };
 </script>
 

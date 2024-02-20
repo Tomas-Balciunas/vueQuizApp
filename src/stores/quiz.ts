@@ -24,9 +24,6 @@ export const useQuizStore = defineStore("quiz", {
     },
   },
   actions: {
-    userAnswer(choice: string) {
-      this.answer = choice;
-    },
     updateCurrentQuestion(data: any) {
       const c = data[0];
       this.current = {

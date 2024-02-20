@@ -37,7 +37,6 @@ export async function fetchQuestions() {
   const response = await axios.get(
     `${QUIZ_BASE_URL}?amount=${route.query.amount}&difficulty=${route.query.difficulty}&type=multiple`
   );
-  console.log("Fetched from API");
 
   return response.data.results;
 }
