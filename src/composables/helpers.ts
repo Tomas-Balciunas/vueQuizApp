@@ -2,6 +2,12 @@ import { ref } from "vue";
 import { difficulties, amounts } from "../info/info";
 import { useQuizStore } from "../stores/quiz";
 import { useScoreStore } from "../stores/score";
+import { useNotifStore } from "../stores/notif";
+import {
+  INCORRECT_OPTIONS,
+  INCORRECT_DIFFICULTY,
+  INCORRECT_AMOUNT,
+} from "../info/info";
 
 export type Votes = {
   name: string;
@@ -86,11 +92,23 @@ export function sorted(choices: string[], votes: Votes[]) {
 }
 
 export function validateParams(query: Query) {
+  const notif = useNotifStore();
   const required = ["difficulty", "amount"];
   const amount = parseInt(query.amount);
-  if (!required.every((e: string) => e in query)) return false;
-  if (!difficulties.find((e) => e.value === query.difficulty)) return false;
-  if (!(amounts.min <= amount && amount <= amounts.max)) return false;
+
+  if (!required.every((e: string) => e in query)) {
+    notif.showNotif(INCORRECT_OPTIONS);
+    return false;
+  }
+
+  if (!difficulties.find((e) => e.value === query.difficulty)) {
+    notif.showNotif(INCORRECT_DIFFICULTY);
+    return false;
+  }
+  if (!(amounts.min <= amount && amount <= amounts.max)) {
+    notif.showNotif(INCORRECT_AMOUNT);
+    return false;
+  }
 
   return true;
 }

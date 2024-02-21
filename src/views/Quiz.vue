@@ -44,7 +44,7 @@ onMounted(async () => {
     }
     !empty.value && quiz.updateCurrentQuestion(data.value);
   } catch (error) {
-    console.error("Data fetch error:", error);
+    console.error("Mount error:", error);
   }
 });
 </script>
@@ -90,7 +90,7 @@ onMounted(async () => {
     </div>
   </div>
 
-  <div class="h-100" v-else>
+  <div v-else class="h-100">
     <h1>Waiting for data...</h1>
     <div class="d-flex flex-column align-center">
       <v-progress-circular
@@ -98,6 +98,9 @@ onMounted(async () => {
         color="red"
         indeterminate
       ></v-progress-circular>
+      <div class="d-flex justify-center">
+        <RouterLink to="/"><h3 aria-label="home">HOME</h3></RouterLink>
+      </div>
     </div>
   </div>
 </template>
@@ -107,6 +110,12 @@ h1 {
   text-align: center;
   color: white;
   padding: 10vh;
+}
+h3 {
+  text-decoration: underline;
+  color: #ffbf00;
+  font-weight: lighter;
+  margin-top: 50px;
 }
 .cont {
   height: 100vh;
